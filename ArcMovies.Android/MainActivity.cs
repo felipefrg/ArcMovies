@@ -21,7 +21,31 @@ namespace ArcMovies.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
+
+#if GORILLA
+            {
+                LoadApplication(
+                                UXDivers
+                                .Gorilla
+                                .Droid
+                                .Player
+                                .CreateApplication(
+                                                    this
+                                                    ,new UXDivers.Gorilla.Config("ArcMovies")
+                                                    .RegisterAssemblyFromType<FFImageLoading.Forms.CachedImage>()
+                                                    )
+
+                                );
+            }
+#else
+            {
+                LoadApplication(new App());
+            }
+
+#endif
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

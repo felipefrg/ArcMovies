@@ -23,7 +23,27 @@ namespace ArcMovies.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+
+#if GORILLA
+            {
+                LoadApplication(
+                        UXDivers
+                        .Gorilla
+                        .iOS
+                        .Player
+                        .CreateApplication(
+                                            new UXDivers.Gorilla.Config("ArcMovies")
+                                            .RegisterAssemblyFromType<FFImageLoading.Forms.CachedImage>()
+                        )
+                    );
+            }
+#else
+            { 
+                LoadApplication(new App());
+            }
+#endif
+
 
             return base.FinishedLaunching(app, options);
         }

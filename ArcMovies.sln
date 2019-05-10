@@ -15,6 +15,8 @@ Global
 		Release|iPhoneSimulator = Release|iPhoneSimulator
 		Debug|iPhone = Debug|iPhone
 		Release|iPhone = Release|iPhone
+		Gorilla|iPhoneSimulator = Gorilla|iPhoneSimulator
+		Gorilla|Any CPU = Gorilla|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F12C9A47-410B-4987-B44C-44D34D4A606C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{F12C9A47-410B-4987-B44C-44D34D4A606C}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{F12C9A47-410B-4987-B44C-44D34D4A606C}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{F12C9A47-410B-4987-B44C-44D34D4A606C}.Release|iPhone.Build.0 = Release|Any CPU
+		{F12C9A47-410B-4987-B44C-44D34D4A606C}.Gorilla|iPhoneSimulator.ActiveCfg = Gorilla|Any CPU
+		{F12C9A47-410B-4987-B44C-44D34D4A606C}.Gorilla|iPhoneSimulator.Build.0 = Gorilla|Any CPU
+		{F12C9A47-410B-4987-B44C-44D34D4A606C}.Gorilla|Any CPU.ActiveCfg = Gorilla|Any CPU
+		{F12C9A47-410B-4987-B44C-44D34D4A606C}.Gorilla|Any CPU.Build.0 = Gorilla|Any CPU
 		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
@@ -41,6 +47,10 @@ Global
 		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Debug|iPhone.Build.0 = Debug|iPhone
 		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Release|iPhone.ActiveCfg = Release|iPhone
 		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Release|iPhone.Build.0 = Release|iPhone
+		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Gorilla|iPhoneSimulator.ActiveCfg = Gorilla|iPhoneSimulator
+		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Gorilla|iPhoneSimulator.Build.0 = Gorilla|iPhoneSimulator
+		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Gorilla|Any CPU.ActiveCfg = Gorilla|iPhoneSimulator
+		{BEC6C445-F4E5-45C6-AAA4-36476C26E343}.Gorilla|Any CPU.Build.0 = Gorilla|iPhoneSimulator
 		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,5 +63,14 @@ Global
 		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Release|iPhone.Build.0 = Release|Any CPU
+		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Gorilla|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Gorilla|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Gorilla|Any CPU.ActiveCfg = Debug|Any CPU
+		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Gorilla|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
 	EndGlobalSection
 EndGlobal
