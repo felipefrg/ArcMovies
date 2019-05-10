@@ -2,9 +2,6 @@
 namespace ArcMovies.Model
 {
     public class Movie
-    {
-        public Movie()
-        {
-        }
+    {       
     }
 }

@@ -1,18 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:template="clr-namespace:ArcMovies.View.Template"
+             xmlns:control="clr-namespace:ArcMovies.ExtendedControl"
              x:Class="ArcMovies.View.HomePage">
+    
+    <ContentPage.Resources>
+        <template:MovieItemTemplate x:Key="MovieItemTemplate"/>
+        <Style TargetType="StackLayout" x:Key="SectionListStyle">
+            <Setter Property="Spacing" Value="0"/>
+            <Setter Property="Orientation" Value="Vertical"/>
+        </Style>
+        <Style TargetType="Label" x:Key="SectionTitleStyle">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <StackLayout 
                      Orientation="Vertical" 
                      HorizontalOptions="FillAndExpand" 
                      VerticalOptions="FillAndExpand">
             
-            <Label Text="Home Page" 
-                   HorizontalOptions="CenterAndExpand" 
-                   VerticalOptions="CenterAndExpand" 
-                   VerticalTextAlignment="Center" 
-                   HorizontalTextAlignment="Center"/>
+            <!--Upcoming List-->
+            <StackLayout Style="{x:StaticResource SectionListStyle}">
+                <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
+                <control:StackLayoutExtended
+                    ItemSource="{Binding UpcomingList.results}"
+                    BackgroundColor="Blue"
+                    Orientation="Horizontal">
+                        <control:StackLayoutExtended.ItemTemplate>
+                            <DataTemplate>
+                               <template:MovieItemTemplate/>
+                            </DataTemplate>
+                        </control:StackLayoutExtended.ItemTemplate>
+                </control:StackLayoutExtended>
+            </StackLayout>
+            <!--Upcoming List-->
+            
+            <!--Upcoming List-->
+            <StackLayout Style="{x:StaticResource SectionListStyle}">
+                <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
+                <control:StackLayoutExtended
+                    ItemSource="{Binding UpcomingList.results}"
+                    BackgroundColor="Blue"
+                    Orientation="Horizontal">
+                        <control:StackLayoutExtended.ItemTemplate>
+                            <DataTemplate>
+                               <template:MovieItemTemplate/>
+                            </DataTemplate>
+                        </control:StackLayoutExtended.ItemTemplate>
+                </control:StackLayoutExtended>
+            </StackLayout>
+            <!--Upcoming List-->
+            
+            <!--Upcoming List-->
+            <StackLayout Style="{x:StaticResource SectionListStyle}">
+                <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
+                <control:StackLayoutExtended
+                    ItemSource="{Binding UpcomingList.results}"
+                    BackgroundColor="Blue"
+                    Orientation="Horizontal">
+                        <control:StackLayoutExtended.ItemTemplate>
+                            <DataTemplate>
+                               <template:MovieItemTemplate/>
+                            </DataTemplate>
+                        </control:StackLayoutExtended.ItemTemplate>
+                </control:StackLayoutExtended>
+            </StackLayout>
+            <!--Upcoming List-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

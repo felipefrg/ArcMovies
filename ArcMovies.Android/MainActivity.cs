@@ -35,6 +35,7 @@ namespace ArcMovies.Droid
                                                     this
                                                     ,new UXDivers.Gorilla.Config("ArcMovies")
                                                     .RegisterAssemblyFromType<FFImageLoading.Forms.CachedImage>()
+                                                    .RegisterAssemblyFromType<ArcMovies.ExtendedControl.StackLayoutExtended>()
                                                     )
 
                                 );

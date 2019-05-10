@@ -83,6 +83,9 @@
     <PackageReference Include="Xamarin.FFImageLoading">
       <Version>2.4.9.961</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms">
+      <Version>2.4.9.961</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

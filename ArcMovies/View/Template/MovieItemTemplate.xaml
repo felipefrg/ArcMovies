@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converter="clr-namespace:ArcMovies.Converter;assembly=ArcMovies"
+             x:Class="ArcMovies.View.Template.MovieItemTemplate">
+    
+    <ContentView.Resources>
+        <Style x:Key="MovieCoverStyle" TargetType="ffimageloading:CachedImage">
+            <Setter Property="HeightRequest" Value="160"/>
+            <Setter Property="Aspect" Value="AspectFit"/> 
+        </Style>
+        <converter:CoverPathConverter x:Key="CoverPathConverter" />
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <ffimageloading:CachedImage 
+        Style="{x:StaticResource MovieCoverStyle}"
+        Source="{Binding poster_path
+                           , Converter={x:StaticResource CoverPathConverter}
+                           , ConverterParameter='w342'}"/>
+    </ContentView.Content>
+</ContentView>

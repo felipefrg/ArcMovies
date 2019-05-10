@@ -1,4 +1,5 @@
 ﻿using System;
+using ArcMovies.View;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,17 @@ namespace ArcMovies
         {
             InitializeComponent();
 
-            MainPage = new View.MainPage();
+            TabbedPage tabbedPage = new TabbedPage();
+
+            NavigationPage homePage = new NavigationPage(new HomePage());
+            NavigationPage searchPage = new NavigationPage(new SearchPage());
+
+            tabbedPage.Children.Add(homePage);
+            tabbedPage.Children.Add(searchPage);
+
+            NavigationPage.SetHasNavigationBar(tabbedPage, false);
+
+            MainPage = new NavigationPage(tabbedPage);
         }
 
         protected override void OnStart()
