@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:template="clr-namespace:ArcMovies.View.Template"
              xmlns:control="clr-namespace:ArcMovies.ExtendedControl"
+             xmlns:converter="clr-namespace:ArcMovies.Converter"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              x:Class="ArcMovies.View.HomePage">
     
     <ContentPage.Resources>
+        <converter:DivideNonNegativeNumberConverter x:Key="DivideNonNegativeNumberConverter"/>
         <template:MovieItemTemplate x:Key="MovieItemTemplate"/>
+        <template:UpcomingBannerTemplate x:Key="UpcomingBannerTemplate"/>
         <Style TargetType="StackLayout" x:Key="SectionListStyle">
             <Setter Property="Spacing" Value="0"/>
             <Setter Property="Orientation" Value="Vertical"/>
@@ -20,13 +25,48 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout 
-                     Orientation="Vertical" 
+        <Grid
+            x:Name="RootGrid"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            
+        <ScrollView 
+                    BackgroundColor="Green" 
+                    Orientation="Vertical">
+            
+            <Grid 
                      HorizontalOptions="FillAndExpand" 
                      VerticalOptions="FillAndExpand">
-            
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{Binding Height
+                                                ,Source={x:Reference RootGrid}
+                                                ,Converter={x:StaticResource DivideNonNegativeNumberConverter}
+                                                ,ConverterParameter=1.5}"/>
+                        
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+            <!--Upcoming Banner-->
+            <carousel:CarouselViewControl ItemsSource="{Binding UpcomingList.results}"
+                                          Grid.Row="0"
+                                          ShowArrows="true"
+                                          ShowIndicators="true"
+                                          IndicatorsShape="Circle"
+                                          BackgroundColor="Red"
+                                          >
+                        <carousel:CarouselViewControl.ItemTemplate>
+                            <DataTemplate>
+                               <template:UpcomingBannerTemplate/>
+                            </DataTemplate>
+                        </carousel:CarouselViewControl.ItemTemplate>
+                        
+                    </carousel:CarouselViewControl>
+            <!--Upcoming Banner-->
+           
             <!--Upcoming List-->
-            <StackLayout Style="{x:StaticResource SectionListStyle}">
+            <StackLayout Grid.Row="1" Style="{x:StaticResource SectionListStyle}">
                 <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
                 <control:StackLayoutExtended
                     ItemSource="{Binding UpcomingList.results}"
@@ -42,7 +82,7 @@
             <!--Upcoming List-->
             
             <!--Upcoming List-->
-            <StackLayout Style="{x:StaticResource SectionListStyle}">
+            <StackLayout Grid.Row="2" Style="{x:StaticResource SectionListStyle}">
                 <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
                 <control:StackLayoutExtended
                     ItemSource="{Binding UpcomingList.results}"
@@ -58,7 +98,7 @@
             <!--Upcoming List-->
             
             <!--Upcoming List-->
-            <StackLayout Style="{x:StaticResource SectionListStyle}">
+            <StackLayout Grid.Row="3" Style="{x:StaticResource SectionListStyle}">
                 <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
                 <control:StackLayoutExtended
                     ItemSource="{Binding UpcomingList.results}"
@@ -72,6 +112,8 @@
                 </control:StackLayoutExtended>
             </StackLayout>
             <!--Upcoming List-->
-        </StackLayout>
+        </Grid>
+        </ScrollView>
+        </Grid>    
     </ContentPage.Content>
 </ContentPage>

@@ -26,6 +26,7 @@
     <PackageReference Include="UXDivers.GorillaPlayer.SDK" Version="1.5.0" />
     <PackageReference Include="UXDivers.GorillaPlayer.Common" Version="0.9.1.2" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.9.961" />
+    <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />
@@ -35,5 +36,8 @@
     <Folder Include="ExtendedControl\" />
     <Folder Include="Converter\" />
     <Folder Include="Helper\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="View\Template\MovieItemTemplate %28copy%29.xaml.cs" />
   </ItemGroup>
 </Project>

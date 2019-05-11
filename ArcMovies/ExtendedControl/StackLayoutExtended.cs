@@ -127,13 +127,13 @@ namespace ArcMovies.ExtendedControl
 
             foreach (var item in ItemSource)
             {
-                this._stackLayout.Children.Add(GetElementView(item));
+                this._stackLayout.Children.Add(CreateChildView(item));
             }
 
             SelectedItem = null;
         }
 
-        protected virtual Xamarin.Forms.View GetElementView(object item)
+        protected virtual Xamarin.Forms.View CreateChildView(object item)
         {
             var template = ItemTemplate.CreateContent();
 

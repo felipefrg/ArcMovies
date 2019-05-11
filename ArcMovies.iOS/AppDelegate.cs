@@ -24,6 +24,7 @@ namespace ArcMovies.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            CarouselView.FormsPlugin.iOS.CarouselViewRenderer.Init();
 
 #if GORILLA
             {
@@ -36,6 +37,7 @@ namespace ArcMovies.iOS
                                             new UXDivers.Gorilla.Config("ArcMovies")
                                             .RegisterAssemblyFromType<FFImageLoading.Forms.CachedImage>()
                                             .RegisterAssemblyFromType<ArcMovies.ExtendedControl.StackLayoutExtended>()
+                                            .RegisterAssemblyFromType<CarouselView.FormsPlugin.Abstractions.CarouselViewControl>()
                         )
                     );
             }
