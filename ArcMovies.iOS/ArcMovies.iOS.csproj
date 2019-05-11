@@ -181,4 +181,22 @@
       <Name>ArcMovies</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\trailer_button_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\trailer_button_small%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\trailer_button_small%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\trailer_overlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\trailer_overlay%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\trailer_overlay%403x.png" />
+  </ItemGroup>
 </Project>

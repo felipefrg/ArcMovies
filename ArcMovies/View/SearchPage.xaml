@@ -52,10 +52,10 @@
             <!--Search Bar-->
             <SearchBar x:Name="searchBar"
                        Grid.Row="0"
-                       BackgroundColor="#FFFF8300"
+                       BackgroundColor="Black"
                        CancelButtonColor="White"
-                       Placeholder="Type movie name here..."
-                       Text="ewew"
+                       Placeholder="Search by movie name here..."
+                       Text=""
                        />
             <!--Search Bar-->
             
@@ -89,7 +89,8 @@
                           BackgroundColor="Transparent" 
                           ItemsSource="{Binding genres}" 
                           HorizontalOptions="FillAndExpand" 
-                          VerticalOptions="FillAndExpand" 
+                          VerticalOptions="FillAndExpand"
+                          ItemSelected="LstSectionName_ItemSelected"
                           SeparatorVisibility="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
