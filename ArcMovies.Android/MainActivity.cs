@@ -22,7 +22,8 @@ namespace ArcMovies.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+            CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
 
 #if GORILLA
             {
@@ -36,13 +37,28 @@ namespace ArcMovies.Droid
                                                     ,new UXDivers.Gorilla.Config("ArcMovies")
                                                     .RegisterAssemblyFromType<FFImageLoading.Forms.CachedImage>()
                                                     .RegisterAssemblyFromType<ArcMovies.ExtendedControl.StackLayoutExtended>()
+                                                    .RegisterAssemblyFromType<CarouselView.FormsPlugin.Abstractions.CarouselViewControl>()
                                                     )
 
                                 );
             }
 #else
             {
-                LoadApplication(new App());
+                //LoadApplication(new App());
+
+            LoadApplication(
+                                UXDivers
+                                .Gorilla
+                                .Droid
+                                .Player
+                                .CreateApplication(
+                                                    this
+                                                    ,new UXDivers.Gorilla.Config("ArcMovies")
+                                                    .RegisterAssemblyFromType<FFImageLoading.Forms.CachedImage>()
+                                                    .RegisterAssemblyFromType<ArcMovies.ExtendedControl.StackLayoutExtended>()
+                                                    )
+
+                                );
             }
 
 #endif

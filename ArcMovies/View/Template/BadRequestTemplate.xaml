@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="ArcMovies.View.Template.BadRequestTemplate">
+    <ContentView.Content>
+        <StackLayout Orientation="Vertical" 
+                     HorizontalOptions="CenterAndExpand" 
+                     VerticalOptions="FillAndExpand">
+            
+            <StackLayout Orientation="Vertical" 
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="CenterAndExpand"
+                         Spacing="10">
+                
+                <Label Text="Ooops... Something get wrong!" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" 
+                       TextColor="White"/>
+                <Button Text="Try Again" 
+                    HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="CenterAndExpand" 
+                    BackgroundColor="#FFFF8300"
+                    TextColor="White"
+                    Clicked="Handle_Clicked"/>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

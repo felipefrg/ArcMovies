@@ -1,18 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:converter="clr-namespace:ArcMovies.Converter"
+             xmlns:template="clr-namespace:ArcMovies.View.Template"
+             xmlns:control="clr-namespace:ArcMovies.ExtendedControl"
+             
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             
              x:Class="ArcMovies.View.SearchPage">
+    
+    <ContentPage.Resources>
+        <converter:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
+        <converter:ValueConverterGroup x:Key="InverseBoolToGridLengthConverter">
+            <converter:InverseBoolConverter/>
+            <converter:BoolToGridLengthConverter/>
+        </converter:ValueConverterGroup>
+        
+       <GridLength x:Key="GridLengthStarValue">*</GridLength>
+         <GridLength x:Key="GridLength20">20</GridLength>
+        
+        <Style x:Key="MovieCoverStyle" TargetType="ffimageloading:CachedImage">
+            <Setter Property="HeightRequest" Value="150"/>
+            <Setter Property="Aspect" Value="AspectFit"/> 
+        </Style>
+        <converter:CoverPathConverter x:Key="CoverPathConverter" />
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout 
-                     Orientation="Vertical" 
-                     HorizontalOptions="FillAndExpand" 
-                     VerticalOptions="FillAndExpand">
+       <Grid x:Name="RootGrid"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> <!--SearchBar-->
+                <!--IsLoading-->
+                <RowDefinition Height="{Binding IsLoading
+                                                , Converter={StaticResource BoolToGridLengthConverter}
+                                                , ConverterParameter={x:StaticResource GridLengthStarValue}}"/>
+                   
+                
+                <!--IsLoading-->
+                <!--Genre List-->
+                <RowDefinition  Height="{Binding IsLoading
+                                                , Converter={StaticResource InverseBoolToGridLengthConverter}
+                                                , ConverterParameter={x:StaticResource GridLengthStarValue}}"/>
+                <!--Genre List-->
+                
+                <RowDefinition Height="Auto"/> <!--Search By Name-->
+                  
+            </Grid.RowDefinitions>
             
-            <Label Text="Search Page" 
-                   HorizontalOptions="CenterAndExpand" 
-                   VerticalOptions="CenterAndExpand" 
-                   VerticalTextAlignment="Center" 
-                   HorizontalTextAlignment="Center"/>
-        </StackLayout>
+            <!--Search Bar-->
+            <SearchBar x:Name="searchBar"
+                       Grid.Row="0"
+                       BackgroundColor="#FFFF8300"
+                       CancelButtonColor="White"
+                       Placeholder="Type movie name here..."
+                       Text="ewew"
+                       />
+            <!--Search Bar-->
+            
+            <!--Activity Indicator -->
+            <ActivityIndicator Grid.Row="1" 
+                               Color="White" 
+                               IsRunning="{Binding IsLoading}" 
+                               IsVisible="{Binding IsLoading}" 
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand"/>
+            <!--Activity Indicator -->
+            
+            <!--Genre List-->
+            <Grid Grid.Row="2" BackgroundColor="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{Binding HasError
+                                                            ,Converter={x:StaticResource BoolToGridLengthConverter} 
+                                                            ,ConverterParameter={x:StaticResource GridLengthStarValue}}"/>
+                    <RowDefinition Height="{Binding HasError
+                                                            ,Converter={x:StaticResource InverseBoolToGridLengthConverter}
+                                                            ,ConverterParameter={x:StaticResource GridLengthStarValue}}}"/>
+                </Grid.RowDefinitions>
+                
+                <!--Error Page-->
+                   <template:BadRequestTemplate Grid.Row="0" ReloadCommand="{Binding LoadCommand}"/>
+                <!--Error Page-->
+                
+                <ListView Grid.Row="1" 
+                          HasUnevenRows="False" 
+                          x:Name="LstSectionName" 
+                          BackgroundColor="Transparent" 
+                          ItemsSource="{Binding genres}" 
+                          HorizontalOptions="FillAndExpand" 
+                          VerticalOptions="FillAndExpand" 
+                          SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>                                                                
+                                <Label TextColor="White" 
+                                       Text="{Binding name}" 
+                                       HorizontalOptions="FillAndExpand" 
+                                       HorizontalTextAlignment="Center" 
+                                       VerticalOptions="FillAndExpand" 
+                                       VerticalTextAlignment="Center">                                    
+                                </Label>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <!--Genre List-->
+            
+            <!--Search By Name-->
+            <Grid Grid.Row="3" BackgroundColor="Transparent">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding Text.Length, Source={x:Reference searchBar}}" Value="0">
+                        <Setter Property="HeightRequest" Value="0"/>
+                    </DataTrigger>
+                </Grid.Triggers>
+                <ScrollView x:Name="MediaScrollView" Grid.Row="0" BackgroundColor="Silver">
+                    <!-- SECTION DETAIL -->
+                    <control:FlexLayoutExtended
+                        
+                            ItemsSource="{Binding results}" Wrap="Wrap" 
+                            BackgroundColor="Green" 
+                            JustifyContent=" SpaceAround">
+                            <control:FlexLayoutExtended.ItemTemplate>
+                            
+                            <DataTemplate>
+                                 <ffimageloading:CachedImage 
+                                                            Style="{x:StaticResource MovieCoverStyle}"
+                                                            Source="{Binding poster_path
+                                                           , Converter={x:StaticResource CoverPathConverter}
+                                                           , ConverterParameter='w342'}"/>
+                            </DataTemplate>
+                            
+                            </control:FlexLayoutExtended.ItemTemplate>
+                    </control:FlexLayoutExtended>
+                </ScrollView>
+            </Grid>
+            <!--Search By Name-->
+             
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
