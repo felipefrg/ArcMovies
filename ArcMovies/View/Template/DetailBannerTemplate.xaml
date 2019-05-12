@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<template:MovieBaseTemplate xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:converter="clr-namespace:ArcMovies.Converter;assembly=ArcMovies"
-             x:Class="ArcMovies.View.Template.DetailBannerTemplate">
+             xmlns:template="clr-namespace:ArcMovies.View.Template"
+             x:Class="ArcMovies.View.Template.DetailBannerTemplate"
+                            x:Name="_DetailBannerTemplate">
     
     <ContentView.Resources>
         <Style x:Key="MovieCoverStyle" TargetType="ffimageloading:CachedImage">
@@ -17,6 +19,10 @@
         Style="{x:StaticResource MovieCoverStyle}"
         Source="{Binding backdrop_path
                            , Converter={x:StaticResource CoverPathConverter}
-                           , ConverterParameter='w500'}"/>
+                           , ConverterParameter='w500'}">
+            <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Handle_Tapped" />
+            </ffimageloading:CachedImage.GestureRecognizers>
+        </ffimageloading:CachedImage>
     </ContentView.Content>
-</ContentView>
+</template:MovieBaseTemplate>

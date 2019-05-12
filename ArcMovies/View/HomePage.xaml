@@ -5,7 +5,8 @@
              xmlns:control="clr-namespace:ArcMovies.ExtendedControl"
              xmlns:converter="clr-namespace:ArcMovies.Converter"
              xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
-             x:Class="ArcMovies.View.HomePage">
+             x:Class="ArcMovies.View.HomePage"
+             x:Name="_HomePage">
     
     <ContentPage.Resources>
         <converter:DivideNonNegativeNumberConverter x:Key="DivideNonNegativeNumberConverter"/>
@@ -48,18 +49,20 @@
                     </Grid.RowDefinitions>
                     
             <!--Upcoming Banner-->
-            <carousel:CarouselViewControl ItemsSource="{Binding UpcomingList}"
+            <carousel:CarouselViewControl ItemsSource="{Binding BannerList}"
                                           Grid.Row="0"
                                           ShowArrows="true"
                                           ShowIndicators="true"
                                           IndicatorsShape="Circle"
                                           BackgroundColor="Red"
                                           IsSwipeEnabled="true"
-                                          
+                                          x:Name="Carousel"
                                           >
                         <carousel:CarouselViewControl.ItemTemplate>
                             <DataTemplate>
-                               <template:UpcomingBannerTemplate/>
+                               <template:UpcomingBannerTemplate SelectCommand="{Binding BindingContext.SelectedMovieCommand
+                                                                                ,Source={x:Reference _HomePage}}"
+                                                                SelectCommandParameter="{Binding BindingContext}"/>
                             </DataTemplate>
                         </carousel:CarouselViewControl.ItemTemplate>
                         
@@ -75,7 +78,9 @@
                     Orientation="Horizontal">
                         <control:StackLayoutExtended.ItemTemplate>
                             <DataTemplate>
-                               <template:MovieItemTemplate/>
+                               <template:MovieItemTemplate SelectCommand="{Binding BindingContext.SelectedMovieCommand
+                                                                                ,Source={x:Reference _HomePage}}"
+                                                           SelectCommandParameter="{Binding BindingContext}"/>
                             </DataTemplate>
                         </control:StackLayoutExtended.ItemTemplate>
                 </control:StackLayoutExtended>
@@ -91,7 +96,9 @@
                     Orientation="Horizontal">
                         <control:StackLayoutExtended.ItemTemplate>
                             <DataTemplate>
-                               <template:MovieItemTemplate/>
+                               <template:MovieItemTemplate SelectCommand="{Binding BindingContext.SelectedMovieCommand
+                                                                                ,Source={x:Reference _HomePage}}"
+                                                           SelectCommandParameter="{Binding BindingContext}"/>
                             </DataTemplate>
                         </control:StackLayoutExtended.ItemTemplate>
                 </control:StackLayoutExtended>
@@ -107,7 +114,9 @@
                     Orientation="Horizontal">
                         <control:StackLayoutExtended.ItemTemplate>
                             <DataTemplate>
-                               <template:MovieItemTemplate/>
+                               <template:MovieItemTemplate SelectCommand="{Binding SelectedMovieCommand
+                                                                                ,Source={x:Reference _HomePage}}"
+                                                           SelectCommandParameter="{Binding BindingContext}"/>
                             </DataTemplate>
                         </control:StackLayoutExtended.ItemTemplate>
                 </control:StackLayoutExtended>

@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace ArcMovies.ViewModel
 {
-    public abstract class BaseViewModel : ObservableObject
+    public abstract class   BaseViewModel : ObservableObject
     {
         private bool _isLoading;
 
         public bool IsLoading
         {
             get { return _isLoading; }
-            set { _isLoading = value; SetProperty(ref _isLoading, value); }
+            set { SetProperty(ref _isLoading, value); }
         }
 
         private bool _hasError;
@@ -20,7 +20,7 @@ namespace ArcMovies.ViewModel
         public bool HasError
         {
             get { return _hasError; }
-            set { _hasError = value; SetProperty(ref _hasError, value); }
+            set { SetProperty(ref _hasError, value); }
         }
 
         protected virtual async Task Load(Func<Task> func)

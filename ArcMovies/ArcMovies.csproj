@@ -37,6 +37,10 @@
     <Folder Include="Service\" />
     <Folder Include="Service\Abstraction\" />
     <Folder Include="Service\Implementation\" />
+    <Folder Include="Navigation\" />
+    <Folder Include="Navigation\Abstraction\" />
+    <Folder Include="Navigation\Implementation\" />
+    <Folder Include="ViewModel\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="View\Template\MovieItemTemplate %28copy%29.xaml.cs" />

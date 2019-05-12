@@ -10,36 +10,36 @@ namespace ArcMovies.ViewModel
 {
     public class SearchViewModel : BaseViewModel
     {
-        ICommand _LoadCommand;
+        ICommand _loadCommand;
         public ICommand LoadCommand
         {
-            get { return _LoadCommand ?? (_LoadCommand = new Command(LoadGenre)); }            
+            get { return _loadCommand ?? (_loadCommand = new Command(LoadGenre)); }            
         }
 
-        private ICommand _SearchByGenreCommand;
+        private ICommand _searchByGenreCommand;
         public ICommand SearchByGenreCommand
         {
-            get { return _SearchByGenreCommand ?? (_SearchByGenreCommand = new Command(SearchByGenre)); }            
+            get { return _searchByGenreCommand ?? (_searchByGenreCommand = new Command(SearchByGenre)); }            
         }
 
-        private ICommand _SearchByKeyWordCommand;
+        private ICommand _searchByKeyWordCommand;
         public ICommand SearchByKeyWordCommand
         {
-            get { return _SearchByKeyWordCommand ?? (_SearchByKeyWordCommand = new Command<string>(SearchByKeyWord)); }            
+            get { return _searchByKeyWordCommand ?? (_searchByKeyWordCommand = new Command<string>(SearchByKeyWord)); }            
         }        
 
         ObservableCollection<Section> _sectionList;
         public ObservableCollection<Section> SectionList
         {
             get { return _sectionList; }
-            set { _sectionList = value; SetProperty(ref _sectionList, value); }
+            set { SetProperty(ref _sectionList, value); }
         }
 
         ObservableCollection<Movie> _mediaList;
         public ObservableCollection<Movie> MediaList
         {
             get {return _mediaList;}
-            set {_mediaList = value; SetProperty(ref _mediaList, value);}
+            set {SetProperty(ref _mediaList, value);}
         }
 
         void SearchByGenre(object section)

@@ -2,7 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using ArcMovies.Model;
+using ArcMovies.Navigation.Abstraction;
 using ArcMovies.Service.Abstraction;
 using ArcMovies.Service.Implementation;
 using Xamarin.Forms;
@@ -12,16 +14,23 @@ namespace ArcMovies.ViewModel
     public class HomeViewModel : BaseViewModel
     {
         #region Binding Properties
+        ObservableCollection<Movie> _bannerList;
+        public ObservableCollection<Movie> BannerList
+        {
+            get { return _bannerList; }
+            set
+            {
+                SetProperty(ref _bannerList, value);
+            }
+        }
+
         ObservableCollection<Movie> _upcomingList;
         public ObservableCollection<Movie> UpcomingList
         {
             get { return _upcomingList; }
             set
             {
-                if (value != _upcomingList)
-                {
-                    SetProperty(ref _upcomingList, value);
-                }
+                SetProperty(ref _upcomingList, value);
             }
         }
 
@@ -31,11 +40,8 @@ namespace ArcMovies.ViewModel
             get { return _topRatedList; }
             set
             {
-                if (value != _topRatedList)
-                { 
-                    SetProperty(ref _topRatedList, value);
+                SetProperty(ref _topRatedList, value);
                 }
-            }
         }
         ObservableCollection<Movie> _popularList;
         public ObservableCollection<Movie> PopularList
@@ -43,15 +49,12 @@ namespace ArcMovies.ViewModel
             get { return _popularList; }
             set
             {
-                if (value != _popularList)
-                {
-                    SetProperty(ref _popularList, value);
-                }
+                SetProperty(ref _popularList, value);
             }
         }
         #endregion Binding Properties
 
-        private Task Load()
+        private Task LoadLists()
         {
             return Task.Run(() =>
             {
@@ -60,9 +63,9 @@ namespace ArcMovies.ViewModel
                 LoadTopRated();
                                         
             });
+        }
 
-
-        }       
+               
         private async Task LoadUpcoming()
         {
             var serviceResult = await DependencyService.Get<ITMDbService>().GetSection(new TMDbConfigMovie()            
@@ -71,7 +74,8 @@ namespace ArcMovies.ViewModel
                                                                                                             .WithCredits());
             if (serviceResult != null && serviceResult.results != null)
             {
-                this.UpcomingList = new ObservableCollection<Movie>(serviceResult.results.Take(5));
+                this.UpcomingList = new ObservableCollection<Movie>(serviceResult.results);
+                this.BannerList = new ObservableCollection<Movie>(serviceResult.results.Take(5));
             }
         }
 
@@ -99,13 +103,29 @@ namespace ArcMovies.ViewModel
             }
         }
 
+        ICommand _selectedMovieCommand;
+        public ICommand SelectedMovieCommand
+        {
+            get { return _selectedMovieCommand ?? (_selectedMovieCommand = 
+                    new Command(async (obj) => { await GoToMovieDetail(obj); })); }
+        }
+
+        private async Task GoToMovieDetail(object obj)
+        {   
+            if(obj is Movie movie)
+            {
+                DetailViewModel detailViewModel = new DetailViewModel(movie);
+                await DependencyService.Get<INavigationPage>().NavigateToMovieDetailAsync(detailViewModel);
+            }
+        }
+
         public HomeViewModel()
         {
             this._popularList = new ObservableCollection<Movie>();
             this._topRatedList = new ObservableCollection<Movie>();
             this._upcomingList = new ObservableCollection<Movie>();
 
-            this.Load();
+            this.Load(LoadLists);
         }
     }
 }

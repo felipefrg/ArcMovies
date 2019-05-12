@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace ArcMovies.View.Template
 {
-    public partial class UpcomingBannerTemplate : ContentView
+    public partial class UpcomingBannerTemplate : MovieBaseTemplate
     {
         public UpcomingBannerTemplate()
         {
