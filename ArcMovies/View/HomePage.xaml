@@ -48,12 +48,14 @@
                     </Grid.RowDefinitions>
                     
             <!--Upcoming Banner-->
-            <carousel:CarouselViewControl ItemsSource="{Binding UpcomingList.results}"
+            <carousel:CarouselViewControl ItemsSource="{Binding UpcomingList}"
                                           Grid.Row="0"
                                           ShowArrows="true"
                                           ShowIndicators="true"
                                           IndicatorsShape="Circle"
                                           BackgroundColor="Red"
+                                          IsSwipeEnabled="true"
+                                          
                                           >
                         <carousel:CarouselViewControl.ItemTemplate>
                             <DataTemplate>
@@ -68,7 +70,7 @@
             <StackLayout Grid.Row="1" Style="{x:StaticResource SectionListStyle}">
                 <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
                 <control:StackLayoutExtended
-                    ItemSource="{Binding UpcomingList.results}"
+                    ItemSource="{Binding UpcomingList}"
                     BackgroundColor="Blue"
                     Orientation="Horizontal">
                         <control:StackLayoutExtended.ItemTemplate>
@@ -80,11 +82,11 @@
             </StackLayout>
             <!--Upcoming List-->
             
-            <!--Upcoming List-->
+            <!--TopRatedList List-->
             <StackLayout Grid.Row="2" Style="{x:StaticResource SectionListStyle}">
                 <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
                 <control:StackLayoutExtended
-                    ItemSource="{Binding UpcomingList.results}"
+                    ItemSource="{Binding TopRatedList}"
                     BackgroundColor="Blue"
                     Orientation="Horizontal">
                         <control:StackLayoutExtended.ItemTemplate>
@@ -94,13 +96,13 @@
                         </control:StackLayoutExtended.ItemTemplate>
                 </control:StackLayoutExtended>
             </StackLayout>
-            <!--Upcoming List-->
+            <!--TopRatedList List-->
             
-            <!--Upcoming List-->
+            <!--PopularList List-->
             <StackLayout Grid.Row="3" Style="{x:StaticResource SectionListStyle}">
                 <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
                 <control:StackLayoutExtended
-                    ItemSource="{Binding UpcomingList.results}"
+                    ItemSource="{Binding PopularList}"
                     BackgroundColor="Blue"
                     Orientation="Horizontal">
                         <control:StackLayoutExtended.ItemTemplate>
@@ -110,7 +112,7 @@
                         </control:StackLayoutExtended.ItemTemplate>
                 </control:StackLayoutExtended>
             </StackLayout>
-            <!--Upcoming List-->
+            <!--PopularList List-->
         </Grid>
         </ScrollView>
         </Grid>    

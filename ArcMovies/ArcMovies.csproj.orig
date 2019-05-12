@@ -34,14 +34,18 @@
     <Folder Include="ExtendedControl\" />
     <Folder Include="Converter\" />
     <Folder Include="Helper\" />
+<<<<<<< Updated upstream
+=======
     <Folder Include="Service\" />
     <Folder Include="Service\Abstraction\" />
+>>>>>>> Stashed changes
     <Folder Include="Service\Implementation\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="View\Template\MovieItemTemplate %28copy%29.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <Compile Update="View\Template\DetailBannerTemplate.xaml.cs">
       <DependentUpon>DetailBannerTemplate.xaml</DependentUpon>
     </Compile>
@@ -50,11 +54,8 @@
     <EmbeddedResource Update="View\DetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="ArcMovies.csproj.orig" />
-  </ItemGroup>
-  <ItemGroup>
+=======
     <ProjectReference Include="..\HttpClient\HttpClient.csproj" />
+>>>>>>> Stashed changes
   </ItemGroup>
 </Project>

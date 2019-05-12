@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcMovies.iOS", "ArcMovies.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArcMovies", "ArcMovies\ArcMovies.csproj", "{06638CEF-F2B1-44A2-9054-329465D4BE57}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HTTPClient", "HTTPClient", "{8E12E930-58D9-4511-9F31-8430CE27D71A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClient", "HttpClient\HttpClient.csproj", "{66246690-59F8-4453-85A3-DC5366407867}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,24 @@ Global
 		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Release|iPhone.Build.0 = Release|Any CPU
 		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{06638CEF-F2B1-44A2-9054-329465D4BE57}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Gorilla|Any CPU.ActiveCfg = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Gorilla|Any CPU.Build.0 = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Gorilla|iPhone.ActiveCfg = Debug|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Gorilla|iPhone.Build.0 = Debug|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Gorilla|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Gorilla|iPhoneSimulator.Build.0 = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Release|iPhone.Build.0 = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{66246690-59F8-4453-85A3-DC5366407867}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,5 +110,8 @@ Global
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66246690-59F8-4453-85A3-DC5366407867} = {8E12E930-58D9-4511-9F31-8430CE27D71A}
 	EndGlobalSection
 EndGlobal

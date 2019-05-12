@@ -5,9 +5,11 @@ namespace ArcMovies.Model
 {
     public class Section
     {
-        public int Page { get; set; }
-        public int Total_Results { get; set; }
-        public int Total_Pages { get; set; }
-        public List<Movie> Results { get; set; }
+        public int page { get; set; }
+        public int total_results { get; set; }
+        public int total_pages { get; set; }
+        public List<Movie> results { get; set; }
+        public Dates dates { get; set; }
+       
     }
 }

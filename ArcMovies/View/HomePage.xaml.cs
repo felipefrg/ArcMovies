@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using ArcMovies.ViewModel;
+using Xamarin.Forms;
 
 namespace ArcMovies.View
 {
@@ -7,6 +8,7 @@ namespace ArcMovies.View
         public HomePage()
         {
             InitializeComponent();
+            this.BindingContext = new HomeViewModel();
         }
     }
 }
