@@ -33,6 +33,7 @@
     <Folder Include="ExtendedControl\" />
     <Folder Include="Converter\" />
     <Folder Include="Helper\" />
+    <Folder Include="Service\Implementation\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="View\Template\MovieItemTemplate %28copy%29.xaml.cs" />
