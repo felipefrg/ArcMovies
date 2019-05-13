@@ -36,5 +36,11 @@ namespace ArcMovies.Service.Implementation
             this._lstAppend.Add("videos");
             return this;
         }
+
+        public TMDbConfigDiscover WithPage(int page)
+        {
+            this.page = page;
+            return this;
+        }
     }
 }

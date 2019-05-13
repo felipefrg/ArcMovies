@@ -6,10 +6,11 @@
              xmlns:control="clr-namespace:ArcMovies.ExtendedControl"
              BackgroundColor="Black"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             
+             x:Name="_SearchPage"
              x:Class="ArcMovies.View.SearchPage">
     
     <ContentPage.Resources>
+        <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
         <converter:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         <converter:ValueConverterGroup x:Key="InverseBoolToGridLengthConverter">
             <converter:InverseBoolConverter/>
@@ -18,6 +19,7 @@
         
        <GridLength x:Key="GridLengthStarValue">*</GridLength>
          <GridLength x:Key="GridLength20">20</GridLength>
+        <GridLength x:Key="GridLength50Value">50</GridLength>
         
         <Style x:Key="MovieCoverStyle" TargetType="ffimageloading:CachedImage">
             <Setter Property="HeightRequest" Value="150"/>
@@ -55,6 +57,9 @@
                        BackgroundColor="Black"
                        CancelButtonColor="White"
                        Placeholder="Search by movie name here..."
+                       SearchCommand="{Binding SearchByKeyWordCommand}"                           
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" 
+                       TextChanged="SearchBar_TextChanged"
                        Text=""
                        />
             <!--Search Bar-->
@@ -110,17 +115,86 @@
             <!--Genre List-->
             
             <!--Search By Name-->
-            <Grid Grid.Row="3" BackgroundColor="Transparent">
+            <Grid Grid.Row="3">
                 <Grid.Triggers>
                     <DataTrigger TargetType="Grid" Binding="{Binding Text.Length, Source={x:Reference searchBar}}" Value="0">
                         <Setter Property="HeightRequest" Value="0"/>
                     </DataTrigger>
                 </Grid.Triggers>
-                <ScrollView x:Name="MediaScrollView" Grid.Row="0" BackgroundColor="Silver">
-                    <!-- SECTION DETAIL -->
-                    <control:FlexLayoutExtended
+                <ScrollView x:Name="MediaScrollView" Grid.Row="0">
+                    <!-- MOVIES BY GENRE -->
+                    <Grid
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="{Binding HasMoreItem
+                                                    , Converter={x:StaticResource BoolToGridLengthConverter} 
+                                                    ,ConverterParameter={x:StaticResource GridLength50Value}}"/>
+                        </Grid.RowDefinitions>
+                    <control:FlexLayoutExtended ItemsSource="{Binding MovieList}" 
+                                                Wrap="Wrap" 
+                                                
+                                                AlignItems="Stretch" 
+                                                
+                                                JustifyContent="SpaceAround" AlignContent="Start">
+                        <control:FlexLayoutExtended.ItemTemplate>
+                            <DataTemplate>
+                               <ffimageloading:CachedImage x:Name="MediaCover" 
+                                                                CacheType="Memory" 
+                                                                CacheDuration="1" 
+                                                                
+                                                                FadeAnimationEnabled="true" 
+                                                                Opacity="1" 
+                                                                Source="{Binding poster_path
+                                                                       , Converter={x:StaticResource CoverPathConverter}
+                                                                       , ConverterParameter='w342'}">
+                                        
+                                        <ffimageloading:CachedImage.HeightRequest>
+                                            <OnIdiom x:TypeArguments="x:Double" Phone="170" Tablet="285"/>
+                                        </ffimageloading:CachedImage.HeightRequest>
+                                        <ffimageloading:CachedImage.WidthRequest>
+                                            <OnIdiom x:TypeArguments="x:Double" Phone="120" Tablet="162" />
+                                        </ffimageloading:CachedImage.WidthRequest>
+                                        <ffimageloading:CachedImage.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                                  Command="{Binding BindingContext.SelectedMovieCommand, 
+                                                                  Source={x:Reference _SearchPage} }" CommandParameter="{Binding .}"/>
+                                        </ffimageloading:CachedImage.GestureRecognizers>
+                                    </ffimageloading:CachedImage>
+                                        
+                            </DataTemplate>
+                        </control:FlexLayoutExtended.ItemTemplate>
                         
-                            ItemsSource="{Binding results}" Wrap="Wrap" 
+                    </control:FlexLayoutExtended>
+                        <Button Grid.Row="1"
+                              Command="{Binding LoadMoreMoviesCommand}"
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand"
+                              BackgroundColor="Gray"
+                              IsVisible="{Binding IsLoadingItems
+                                        , Converter={x:StaticResource InverseBoolConverter}}"
+                              Text="Load More"
+                              TextColor="White"/>
+                        <ActivityIndicator
+                                       Grid.Row="1"
+                                       HorizontalOptions="FillAndExpand" 
+                                       VerticalOptions="FillAndExpand" 
+                                       Color="White" 
+                                       IsVisible="{Binding IsLoadingItems}"
+                                       IsRunning="{Binding IsLoadingItems}"
+                                       />
+                    </Grid>
+                    
+                    
+                    
+                    
+                    
+                    <!-- SECTION DETAIL -->
+                    
+                    <!--<control:FlexLayoutExtended
+                        
+                            ItemsSource="{Binding MovieList}" Wrap="Wrap" 
                             BackgroundColor="Green" 
                             JustifyContent=" SpaceAround">
                             <control:FlexLayoutExtended.ItemTemplate>
@@ -134,7 +208,7 @@
                             </DataTemplate>
                             
                             </control:FlexLayoutExtended.ItemTemplate>
-                    </control:FlexLayoutExtended>
+                    </control:FlexLayoutExtended>-->
                 </ScrollView>
             </Grid>
             <!--Search By Name-->

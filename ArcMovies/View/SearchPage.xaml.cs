@@ -12,6 +12,20 @@ namespace ArcMovies.View
         {
             InitializeComponent();
             this.BindingContext = new SearchViewModel();
+
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchText(e.NewTextValue);
+        }
+
+        void SearchText(string text)
+        {
+            if (this.BindingContext is SearchViewModel context)
+            {
+                context.SearchText = string.IsNullOrWhiteSpace(text) ? string.Empty : text;
+            }
         }
 
         private void LstSectionName_ItemSelected(object sender, SelectedItemChangedEventArgs e)

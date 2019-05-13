@@ -75,6 +75,8 @@ namespace ArcMovies.ViewModel
             if (serviceResult != null && serviceResult.results != null)
             {
                 this.UpcomingList = new ObservableCollection<Movie>(serviceResult.results);
+
+
                 this.BannerList = new ObservableCollection<Movie>(serviceResult.results.Take(5));
             }
         }
@@ -88,6 +90,7 @@ namespace ArcMovies.ViewModel
             if (serviceResult != null && serviceResult.results != null)
             {
                 this.TopRatedList = new ObservableCollection<Movie>(serviceResult.results);
+
             }
         }
 
@@ -100,6 +103,7 @@ namespace ArcMovies.ViewModel
             if (serviceResult != null && serviceResult.results != null)
             {
                 this.PopularList = new ObservableCollection<Movie>(serviceResult.results);
+
             }
         }
 
@@ -114,8 +118,10 @@ namespace ArcMovies.ViewModel
         {   
             if(obj is Movie movie)
             {
-                DetailViewModel detailViewModel = new DetailViewModel(movie);
-                await DependencyService.Get<INavigationPage>().NavigateToMovieDetailAsync(detailViewModel);
+
+                    DetailViewModel detailViewModel = new DetailViewModel(movie);
+                    await DependencyService.Get<INavigationPage>().NavigateToMovieDetailAsync(detailViewModel);
+
             }
         }
 
@@ -124,6 +130,7 @@ namespace ArcMovies.ViewModel
             this._popularList = new ObservableCollection<Movie>();
             this._topRatedList = new ObservableCollection<Movie>();
             this._upcomingList = new ObservableCollection<Movie>();
+            this._bannerList = new ObservableCollection<Movie>();
 
             this.Load(LoadLists);
         }

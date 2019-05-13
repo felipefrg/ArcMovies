@@ -3,22 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:template="clr-namespace:ArcMovies.View.Template"
              xmlns:converter="clr-namespace:ArcMovies.Converter;assembly=ArcMovies"
-             xmlns:control="clr-namespace:ArcMovies.View.ExtendedControl"
+             xmlns:control="clr-namespace:ArcMovies.ExtendedControl;assembly=ArcMovies"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              NavigationPage.HasNavigationBar="True"
              NavigationPage.HasBackButton="True"    
              BackgroundColor="Black"
-             x:Class="ArcMovies.View.GenrePage">
+             x:Class="ArcMovies.View.GenrePage"
+             x:Name="_GenrePage">
     
     <ContentPage.Resources>
         <converter:CoverPathConverter x:Key="CoverPathConverter" />
         <converter:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
+        <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
         <converter:ValueConverterGroup x:Key="InverseBoolToGridLengthConverter">
             <converter:InverseBoolConverter/>
             <converter:BoolToGridLengthConverter/>
         </converter:ValueConverterGroup>
         
         <GridLength x:Key="GridLengthStarValue">*</GridLength>
+        <GridLength x:Key="GridLength50Value">50</GridLength>
     </ContentPage.Resources>
         
     <ContentPage.Content>
@@ -55,18 +58,27 @@
                     </Grid.RowDefinitions>                    
                   
                     <!-- MOVIES BY GENRE -->
-                    <control:FlexLayoutExtended ItemsSource="{Binding MovieList.results}" 
+                    <Grid
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="{Binding HasMoreItem
+                                                    , Converter={x:StaticResource BoolToGridLengthConverter} 
+                                                    ,ConverterParameter={x:StaticResource GridLength50Value}}"/>
+                        </Grid.RowDefinitions>
+                    <control:FlexLayoutExtended ItemsSource="{Binding MovieList}" 
                                                 Wrap="Wrap" 
-                                                BackgroundColor="Green"
+                                                
                                                 AlignItems="Stretch" 
                                                 
                                                 JustifyContent="SpaceAround" AlignContent="Start">
                         <control:FlexLayoutExtended.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <ffimageloading:CachedImage x:Name="MediaCover" 
+                               <ffimageloading:CachedImage x:Name="MediaCover" 
                                                                 CacheType="Memory" 
                                                                 CacheDuration="1" 
+                                                                
                                                                 FadeAnimationEnabled="true" 
                                                                 Opacity="1" 
                                                                 Source="{Binding poster_path
@@ -81,15 +93,33 @@
                                         </ffimageloading:CachedImage.WidthRequest>
                                         <ffimageloading:CachedImage.GestureRecognizers>
                                             <TapGestureRecognizer NumberOfTapsRequired="1" 
-                                                                  Command="{Binding BindingContext.SelectMediaCommand, 
-                                                                  Source={x:Reference MediaCover} }" CommandParameter="{Binding .}"/>
+                                                                  Command="{Binding BindingContext.SelectedMovieCommand, 
+                                                                  Source={x:Reference _GenrePage} }" CommandParameter="{Binding .}"/>
                                         </ffimageloading:CachedImage.GestureRecognizers>
                                     </ffimageloading:CachedImage>
-                                </Grid>           
+                                        
                             </DataTemplate>
                         </control:FlexLayoutExtended.ItemTemplate>
                         
                     </control:FlexLayoutExtended>
+                        <Button Grid.Row="1"
+                              Command="{Binding LoadMoreMoviesCommand}"
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand"
+                              BackgroundColor="Gray"
+                              IsVisible="{Binding IsLoadingItems
+                                        , Converter={x:StaticResource InverseBoolConverter}}"
+                              Text="Load More"
+                              TextColor="White"/>
+                        <ActivityIndicator
+                                       Grid.Row="1"
+                                       HorizontalOptions="FillAndExpand" 
+                                       VerticalOptions="FillAndExpand" 
+                                       Color="White" 
+                                       IsVisible="{Binding IsLoadingItems}"
+                                       IsRunning="{Binding IsLoadingItems}"
+                                       />
+                    </Grid>
                     <!-- MOVIES BY GENRE -->
                     
                     <ActivityIndicator HorizontalOptions="FillAndExpand" 
@@ -97,7 +127,8 @@
                                        Grid.Row="1" 
                                        Color="White" 
                                        IsVisible="{Binding IsLoading}"
-                                       IsRunning="{Binding IsLoading}"/>
+                                       IsRunning="{Binding IsLoading}"
+                                       />
 
                 </Grid>
             </ScrollView>

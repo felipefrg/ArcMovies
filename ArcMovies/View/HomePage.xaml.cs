@@ -9,6 +9,9 @@ namespace ArcMovies.View
         {
             InitializeComponent();
             this.BindingContext = new HomeViewModel();
+
+            //On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
+
         }
     }
 }

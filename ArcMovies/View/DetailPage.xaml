@@ -146,11 +146,12 @@
                             </Grid>
                         <StackLayout 
                             Margin="5,40"
-                            Grid.Column="1"                             
+                            Grid.Column="1" 
+                            HeightRequest="100"                            
                             Orientation="Vertical"
-                            BackgroundColor="Transparent">
+                            >
                             <Label Text="{Binding title}"
-                                   FontSize="Large"/>
+                                   FontSize="Large" LineBreakMode="NoWrap"/>
 
                             <Label Text="{Binding vote_average, StringFormat='Score: {0}'}" />
                             <Label Text="{Binding release_date, StringFormat='Release: {0}'}"/>

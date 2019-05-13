@@ -120,6 +120,18 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\search_gray.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\home_gray.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\search_gray.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\home_gray.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\search_gray.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\home_gray.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\search_gray.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\home_gray.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

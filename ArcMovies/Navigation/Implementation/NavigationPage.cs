@@ -14,12 +14,7 @@ namespace ArcMovies.Navigation.Implementation
         {
             GenrePage genrePage = new GenrePage(genreViewModel);
             await NavigateTo(genrePage);
-        }
-
-        public Task NavigateToGenreAsync()
-        {
-            throw new NotImplementedException();
-        }
+        }      
 
         public Task NavigateToHomeAsync()
         {
@@ -34,10 +29,15 @@ namespace ArcMovies.Navigation.Implementation
 
         private async Task NavigateTo(Page page)
         {
-            var tabPage = Application.Current.MainPage as TabbedPage;
-            if (tabPage.SelectedItem is Page _page)
+            if (Application.Current.MainPage is Xamarin.Forms.NavigationPage navigationPage)
             {
-                await _page.Navigation.PushAsync(page);
+                if (navigationPage.CurrentPage is TabbedPage tabPage)
+                {
+                    if (tabPage.CurrentPage is Page _page)
+                    {
+                        await _page.Navigation.PushAsync(page);
+                    }
+                }
             }
         }
     }

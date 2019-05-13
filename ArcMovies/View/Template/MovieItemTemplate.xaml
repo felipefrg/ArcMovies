@@ -16,14 +16,41 @@
     </ContentView.Resources>
     
     <ContentView.Content>
+        <!-- <Grid 
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding id}" Value="-1">
+                        <Setter Property="BackgroundColor" Value="Gray"/>
+                    </DataTrigger>
+                </Grid.Triggers>-->
+            
+            
         <ffimageloading:CachedImage 
-        Style="{x:StaticResource MovieCoverStyle}"
-        Source="{Binding poster_path
-                           , Converter={x:StaticResource CoverPathConverter}
-                           , ConverterParameter='w342'}">
+                                    Style="{x:StaticResource MovieCoverStyle}"
+                                    Source="{Binding poster_path
+                                                   , Converter={x:StaticResource CoverPathConverter}
+                                                   , ConverterParameter='w342'}">
             <ffimageloading:CachedImage.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Handle_Tapped" />
             </ffimageloading:CachedImage.GestureRecognizers>
         </ffimageloading:CachedImage>
+            
+        <!--<Label Text="More" IsVisible="false" 
+               WidthRequest="80"
+                                    TextColor="White" 
+                                    HorizontalTextAlignment="Center" 
+                                    VerticalTextAlignment="Center">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding id}" Value="-1">
+                        <Setter Property="IsVisible" Value="true"/>
+                    </DataTrigger>
+              </Label.Triggers>
+              <Label.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                          Tapped="Handle_Tapped"/>
+              </Label.GestureRecognizers>
+            </Label>
+        </Grid>-->
     </ContentView.Content>
 </template:MovieBaseTemplate>

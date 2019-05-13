@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace ArcMovies.Droid
 {
-    [Activity(Label = "ArcMovies", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "ArcMovies", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -44,23 +44,13 @@ namespace ArcMovies.Droid
             }
 #else
             {
-                //LoadApplication(new App());
-
-            LoadApplication(
-                                UXDivers
-                                .Gorilla
-                                .Droid
-                                .Player
-                                .CreateApplication(
-                                                    this
-                                                    ,new UXDivers.Gorilla.Config("ArcMovies")
-                                                    .RegisterAssemblyFromType<FFImageLoading.Forms.CachedImage>()
-                                                    .RegisterAssemblyFromType<ArcMovies.ExtendedControl.StackLayoutExtended>()
-                                                    )
-
-                                );
+                LoadApplication(new App());
             }
 
+            Window window = this.Window;
+            window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            window.SetStatusBarColor(Android.Graphics.Color.Rgb(112, 78, 38));
 #endif
 
         }

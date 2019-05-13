@@ -9,6 +9,5 @@ namespace ArcMovies.Navigation.Abstraction
         Task NavigateToMovieDetailAsync(DetailViewModel detailViewModel);
         Task NavigateToHomeAsync();
         Task NavigateToGenreAsync(GenreViewModel genreViewModel);
-        Task NavigateToGenreAsync();
     }
 }

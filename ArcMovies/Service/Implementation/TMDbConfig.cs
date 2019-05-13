@@ -8,11 +8,15 @@ namespace ArcMovies.Service.Implementation
     {
         private string _path = "";
 
+        protected string _query = "";
+
         protected string _action = "";
 
         protected List<int> _lstGenre;
 
         protected List<string> _lstAppend;
+
+        protected int page = 1;
 
         public TMDbConfig(string path)
         {
@@ -31,6 +35,27 @@ namespace ArcMovies.Service.Implementation
                                     : $"&with_genres={genres}";
             }
         }
+
+        private void AddPage()
+        {
+            if (page > 0)
+            {
+                this._path += this._path.Substring(this._path.Length - 1) == "?"
+                                    ? $"page={page}"
+                                    : $"&page={page}";
+            }
+        }
+
+        private void AddQuery()
+        {
+            if (!string.IsNullOrWhiteSpace(this._query))
+            {
+                this._path += this._path.Substring(this._path.Length - 1) == "?"
+                                    ? $"query={_query}"
+                                    : $"&query={_query}";
+            }
+        }
+
 
         public virtual string Build()
         {
@@ -57,6 +82,8 @@ namespace ArcMovies.Service.Implementation
             }
 
             this.CheckGenre();
+            this.AddPage();
+            this.AddQuery();
 
 
             return this._path;

@@ -47,6 +47,13 @@ namespace ArcMovies.iOS
             }
 #endif
 
+            UIView statusBar = UIApplication.SharedApplication.ValueForKey(new NSString("statusBar")) as UIView;
+            if (statusBar.RespondsToSelector(new ObjCRuntime.Selector("setBackgroundColor:")))
+            {
+                statusBar.BackgroundColor = UIColor.Black;
+                statusBar.TintColor = UIColor.White;
+            }
+            
 
             return base.FinishedLaunching(app, options);
         }

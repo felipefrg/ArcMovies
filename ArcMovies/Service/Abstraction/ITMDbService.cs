@@ -10,6 +10,6 @@ namespace ArcMovies.Service.Abstraction
         Task<Section> GetSection(ITMDbConfig config);
         Task<Movie> GetMovieDetail(ITMDbConfig config);
         Task<Genres> GetGenres(ITMDbConfig config);
-        Task<Section> GetDiscover(ITMDbConfig config)
+        Task<Section> GetDiscover(ITMDbConfig config);
     }
 }
