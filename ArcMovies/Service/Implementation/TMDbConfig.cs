@@ -10,12 +10,26 @@ namespace ArcMovies.Service.Implementation
 
         protected string _action = "";
 
+        protected List<int> _lstGenre;
+
         protected List<string> _lstAppend;
 
         public TMDbConfig(string path)
         {
             this._path = path;
             this._lstAppend = new List<string>();
+            this._lstGenre = new List<int>();
+        }
+
+        private void CheckGenre()
+        {
+            string genres = String.Join(",", this._lstGenre);
+            if (!string.IsNullOrWhiteSpace(genres))
+            {
+                this._path += this._path.Substring(this._path.Length - 1) == "?"
+                                    ? $"with_genres={genres}"
+                                    : $"&with_genres={genres}";
+            }
         }
 
         public virtual string Build()
@@ -41,6 +55,8 @@ namespace ArcMovies.Service.Implementation
                                     ? $"append_to_response={appends}"
                                     : $"&append_to_response={appends}";
             }
+
+            this.CheckGenre();
 
 
             return this._path;

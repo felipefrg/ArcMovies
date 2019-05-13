@@ -20,10 +20,11 @@ namespace ArcMovies.View
             {
                 if (this.BindingContext is SearchViewModel context)
                 {
-                    //SearchSectionHelper searchSectionHelper = new SearchSectionHelper() { Page = this, Section = e.SelectedItem as Section };
-                    //context.SearchBySessionCommand?.Execute(searchSectionHelper);
+                    if(context.SearchByGenreCommand != null && context.SearchByGenreCommand.CanExecute(e.SelectedItem))
+                    {
+                        context.SearchByGenreCommand.Execute(e.SelectedItem);
+                    }
                 }
-
                 ((Xamarin.Forms.ListView)sender).SelectedItem = null;
             }
         }

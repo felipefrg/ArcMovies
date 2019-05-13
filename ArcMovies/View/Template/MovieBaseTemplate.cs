@@ -51,9 +51,9 @@ namespace ArcMovies.View.Template
 
         protected void Handle_Tapped(object sender, System.EventArgs e)
         {
-            if (this.SelectCommand != null && SelectCommand.CanExecute(sender))
+            if (this.SelectCommand != null && SelectCommand.CanExecute(SelectCommandParameter))
             {
-                SelectCommand.Execute(sender);
+                SelectCommand.Execute(SelectCommandParameter);
             }
         }
 

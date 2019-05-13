@@ -23,22 +23,25 @@ namespace ArcMovies.ViewModel
             set { SetProperty(ref _hasError, value); }
         }
 
-        protected virtual async Task Load(Func<Task> func)
+        protected virtual void Load(Func<Task> func)
         {
+            Task.Run(async () => { 
             try
             {
                 IsLoading = true;
                 HasError = false;
                 await func.Invoke();
             }
-            catch
+            catch(Exception ex)
             {
                 HasError = true;
+                Console.WriteLine($"Exception Message: {ex.Message} - StackTrace: {ex.StackTrace}");
             }
             finally
             {
                 IsLoading = false;
             }
+            });
         }
 
 

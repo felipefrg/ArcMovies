@@ -6,6 +6,7 @@
              xmlns:converter="clr-namespace:ArcMovies.Converter"
              xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              x:Class="ArcMovies.View.HomePage"
+             BackgroundColor="Black"
              x:Name="_HomePage">
     
     <ContentPage.Resources>
@@ -31,7 +32,7 @@
             VerticalOptions="FillAndExpand">
             
         <ScrollView 
-                    BackgroundColor="Green" 
+                    BackgroundColor="Transparent" 
                     Orientation="Vertical">
             
             <Grid 
@@ -54,7 +55,7 @@
                                           ShowArrows="true"
                                           ShowIndicators="true"
                                           IndicatorsShape="Circle"
-                                          BackgroundColor="Red"
+                                          BackgroundColor="Transparent"
                                           IsSwipeEnabled="true"
                                           x:Name="Carousel"
                                           >
@@ -62,7 +63,7 @@
                             <DataTemplate>
                                <template:UpcomingBannerTemplate SelectCommand="{Binding BindingContext.SelectedMovieCommand
                                                                                 ,Source={x:Reference _HomePage}}"
-                                                                SelectCommandParameter="{Binding BindingContext}"/>
+                                                                SelectCommandParameter="{Binding .}"/>
                             </DataTemplate>
                         </carousel:CarouselViewControl.ItemTemplate>
                         
@@ -71,16 +72,16 @@
            
             <!--Upcoming List-->
             <StackLayout Grid.Row="1" Style="{x:StaticResource SectionListStyle}">
-                <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
+                <Label Text="Upcoming" Style="{x:StaticResource SectionTitleStyle}"/>
                 <control:StackLayoutExtended
                     ItemSource="{Binding UpcomingList}"
-                    BackgroundColor="Blue"
+                    BackgroundColor="Transparent"
                     Orientation="Horizontal">
                         <control:StackLayoutExtended.ItemTemplate>
                             <DataTemplate>
                                <template:MovieItemTemplate SelectCommand="{Binding BindingContext.SelectedMovieCommand
                                                                                 ,Source={x:Reference _HomePage}}"
-                                                           SelectCommandParameter="{Binding BindingContext}"/>
+                                                           SelectCommandParameter="{Binding .}"/>
                             </DataTemplate>
                         </control:StackLayoutExtended.ItemTemplate>
                 </control:StackLayoutExtended>
@@ -89,16 +90,16 @@
             
             <!--TopRatedList List-->
             <StackLayout Grid.Row="2" Style="{x:StaticResource SectionListStyle}">
-                <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
+                <Label Text="Top Rated" Style="{x:StaticResource SectionTitleStyle}"/>
                 <control:StackLayoutExtended
                     ItemSource="{Binding TopRatedList}"
-                    BackgroundColor="Blue"
+                    BackgroundColor="Transparent"
                     Orientation="Horizontal">
                         <control:StackLayoutExtended.ItemTemplate>
                             <DataTemplate>
                                <template:MovieItemTemplate SelectCommand="{Binding BindingContext.SelectedMovieCommand
                                                                                 ,Source={x:Reference _HomePage}}"
-                                                           SelectCommandParameter="{Binding BindingContext}"/>
+                                                           SelectCommandParameter="{Binding .}"/>
                             </DataTemplate>
                         </control:StackLayoutExtended.ItemTemplate>
                 </control:StackLayoutExtended>
@@ -107,16 +108,16 @@
             
             <!--PopularList List-->
             <StackLayout Grid.Row="3" Style="{x:StaticResource SectionListStyle}">
-                <Label Text="Home Page" Style="{x:StaticResource SectionTitleStyle}"/>
+                <Label Text="Popular" Style="{x:StaticResource SectionTitleStyle}"/>
                 <control:StackLayoutExtended
                     ItemSource="{Binding PopularList}"
-                    BackgroundColor="Blue"
+                    BackgroundColor="Transparent"
                     Orientation="Horizontal">
                         <control:StackLayoutExtended.ItemTemplate>
                             <DataTemplate>
-                               <template:MovieItemTemplate SelectCommand="{Binding SelectedMovieCommand
+                               <template:MovieItemTemplate SelectCommand="{Binding BindingContext.SelectedMovieCommand
                                                                                 ,Source={x:Reference _HomePage}}"
-                                                           SelectCommandParameter="{Binding BindingContext}"/>
+                                                           SelectCommandParameter="{Binding .}"/>
                             </DataTemplate>
                         </control:StackLayoutExtended.ItemTemplate>
                 </control:StackLayoutExtended>

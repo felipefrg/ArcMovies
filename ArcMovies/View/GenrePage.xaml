@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:template="clr-namespace:ArcMovies.View.Template"
+             xmlns:converter="clr-namespace:ArcMovies.Converter;assembly=ArcMovies"
+             xmlns:control="clr-namespace:ArcMovies.View.ExtendedControl"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="True"    
+             BackgroundColor="Black"
+             x:Class="ArcMovies.View.GenrePage">
+    
+    <ContentPage.Resources>
+        <converter:CoverPathConverter x:Key="CoverPathConverter" />
+        <converter:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
+        <converter:ValueConverterGroup x:Key="InverseBoolToGridLengthConverter">
+            <converter:InverseBoolConverter/>
+            <converter:BoolToGridLengthConverter/>
+        </converter:ValueConverterGroup>
+        
+        <GridLength x:Key="GridLengthStarValue">*</GridLength>
+    </ContentPage.Resources>
+        
+    <ContentPage.Content>
+        <Grid
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                 <RowDefinition Height="{Binding HasError
+                                                    , Converter={x:StaticResource BoolToGridLengthConverter}
+                                                    , ConverterParameter={x:StaticResource GridLengthStarValue}}"/>
+                        <RowDefinition Height="{Binding HasError
+                                                    , Converter={x:StaticResource InverseBoolToGridLengthConverter}
+                                                    , ConverterParameter={x:StaticResource GridLengthStarValue}}"/>
+            </Grid.RowDefinitions>
+            
+            <!--WHEN ERROR OCCURS-->
+            <template:BadRequestTemplate />
+            <!--WHEN ERROR OCCURS-->
+            
+            <!-- MAIN AREA -->
+            <ScrollView x:Name="MediaScrollView" 
+                        Grid.Row="1"
+                        
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="FillAndExpand" >
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{Binding IsLoading
+                                                    , Converter={x:StaticResource InverseBoolToGridLengthConverter}
+                                                    , ConverterParameter={x:StaticResource GridLengthStarValue}}"/>
+                        <RowDefinition Height="{Binding IsLoading
+                                                    , Converter={x:StaticResource BoolToGridLengthConverter}
+                                                    , ConverterParameter={x:StaticResource GridLengthStarValue}}"/>
+                    </Grid.RowDefinitions>                    
+                  
+                    <!-- MOVIES BY GENRE -->
+                    <control:FlexLayoutExtended ItemsSource="{Binding MovieList.results}" 
+                                                Wrap="Wrap" 
+                                                BackgroundColor="Green"
+                                                AlignItems="Stretch" 
+                                                
+                                                JustifyContent="SpaceAround" AlignContent="Start">
+                        <control:FlexLayoutExtended.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <ffimageloading:CachedImage x:Name="MediaCover" 
+                                                                CacheType="Memory" 
+                                                                CacheDuration="1" 
+                                                                FadeAnimationEnabled="true" 
+                                                                Opacity="1" 
+                                                                Source="{Binding poster_path
+                                                                       , Converter={x:StaticResource CoverPathConverter}
+                                                                       , ConverterParameter='w342'}">
+                                        
+                                        <ffimageloading:CachedImage.HeightRequest>
+                                            <OnIdiom x:TypeArguments="x:Double" Phone="170" Tablet="285"/>
+                                        </ffimageloading:CachedImage.HeightRequest>
+                                        <ffimageloading:CachedImage.WidthRequest>
+                                            <OnIdiom x:TypeArguments="x:Double" Phone="120" Tablet="162" />
+                                        </ffimageloading:CachedImage.WidthRequest>
+                                        <ffimageloading:CachedImage.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                                  Command="{Binding BindingContext.SelectMediaCommand, 
+                                                                  Source={x:Reference MediaCover} }" CommandParameter="{Binding .}"/>
+                                        </ffimageloading:CachedImage.GestureRecognizers>
+                                    </ffimageloading:CachedImage>
+                                </Grid>           
+                            </DataTemplate>
+                        </control:FlexLayoutExtended.ItemTemplate>
+                        
+                    </control:FlexLayoutExtended>
+                    <!-- MOVIES BY GENRE -->
+                    
+                    <ActivityIndicator HorizontalOptions="FillAndExpand" 
+                                       VerticalOptions="FillAndExpand" 
+                                       Grid.Row="1" 
+                                       Color="White" 
+                                       IsVisible="{Binding IsLoading}"
+                                       IsRunning="{Binding IsLoading}"/>
+
+                </Grid>
+            </ScrollView>
+            <!-- MAIN AREA -->
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

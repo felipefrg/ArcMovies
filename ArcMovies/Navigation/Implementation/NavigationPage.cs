@@ -10,23 +10,23 @@ namespace ArcMovies.Navigation.Implementation
 {
     public class NavigationPage : INavigationPage
     {
+        public async Task NavigateToGenreAsync(GenreViewModel genreViewModel)
+        {
+            GenrePage genrePage = new GenrePage(genreViewModel);
+            await NavigateTo(genrePage);
+        }
+
+        public Task NavigateToGenreAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task NavigateToHomeAsync()
         {
             throw new NotImplementedException();
         }
 
         public async Task NavigateToMovieDetailAsync(DetailViewModel detailViewModel)
-        {
-            DetailPage page = new DetailPage(detailViewModel);
-            await NavigateTo(page);
-        }
-
-        public Task NavigateToSectionAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task NavigateToSectionDetailAsync(DetailViewModel detailViewModel)
         {
             DetailPage page = new DetailPage(detailViewModel);
             await NavigateTo(page);

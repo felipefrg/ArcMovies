@@ -1,10 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:template="clr-namespace:ArcMovies.View.Template"
              xmlns:control="clr-namespace:ArcMovies.ExtendedControl"
              xmlns:converter="clr-namespace:ArcMovies.Converter"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="Black"
              x:Class="ArcMovies.View.DetailPage">
     <ContentPage.Resources>
         <converter:DivideNonNegativeNumberConverter x:Key="DivideNonNegativeNumberConverter"/>
@@ -147,7 +148,7 @@
                             Margin="5,40"
                             Grid.Column="1"                             
                             Orientation="Vertical"
-                            BackgroundColor="Blue">
+                            BackgroundColor="Transparent">
                             <Label Text="{Binding title}"
                                    FontSize="Large"/>
 

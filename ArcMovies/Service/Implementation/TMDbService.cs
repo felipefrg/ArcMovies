@@ -39,5 +39,27 @@ namespace ArcMovies.Service.Implementation
             var response = await serviceRequest.Request<Movie>(uri);
             return response;
         }
+
+        public async Task<Genres> GetGenres(ITMDbConfig config)
+        {
+            IHttpClient httpClient = new HttpClient.Implementation.HttpClient();
+
+            string uri = config.Build();
+
+            ServiceRequest serviceRequest = new ServiceRequest(httpClient);
+            var response = await serviceRequest.Request<Genres>(uri);
+            return response;
+        }
+
+        public async Task<Section> GetDiscover(ITMDbConfig config)
+        {
+            IHttpClient httpClient = new HttpClient.Implementation.HttpClient();
+
+            string uri = config.Build();
+
+            ServiceRequest serviceRequest = new ServiceRequest(httpClient);
+            var response = await serviceRequest.Request<Section>(uri);
+            return response;
+        }
     }
 }
