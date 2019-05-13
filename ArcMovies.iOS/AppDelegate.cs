@@ -23,7 +23,37 @@ namespace ArcMovies.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            CarouselView.FormsPlugin.iOS.CarouselViewRenderer.Init();
+
+#if GORILLA
+            {
+                LoadApplication(
+                        UXDivers
+                        .Gorilla
+                        .iOS
+                        .Player
+                        .CreateApplication(
+                                            new UXDivers.Gorilla.Config("ArcMovies")
+                                            .RegisterAssemblyFromType<FFImageLoading.Forms.CachedImage>()
+                                            .RegisterAssemblyFromType<ArcMovies.ExtendedControl.StackLayoutExtended>()
+                                            .RegisterAssemblyFromType<CarouselView.FormsPlugin.Abstractions.CarouselViewControl>()
+                        )
+                    );
+            }
+#else
+            { 
+                LoadApplication(new App());
+            }
+#endif
+
+            UIView statusBar = UIApplication.SharedApplication.ValueForKey(new NSString("statusBar")) as UIView;
+            if (statusBar.RespondsToSelector(new ObjCRuntime.Selector("setBackgroundColor:")))
+            {
+                statusBar.BackgroundColor = UIColor.Black;
+                statusBar.TintColor = UIColor.White;
+            }
+            
 
             return base.FinishedLaunching(app, options);
         }

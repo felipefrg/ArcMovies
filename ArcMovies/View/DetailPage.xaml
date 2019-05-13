@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:template="clr-namespace:ArcMovies.View.Template"
+             xmlns:control="clr-namespace:ArcMovies.ExtendedControl"
+             xmlns:converter="clr-namespace:ArcMovies.Converter"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="Black"
+             x:Class="ArcMovies.View.DetailPage">
+    <ContentPage.Resources>
+        <converter:DivideNonNegativeNumberConverter x:Key="DivideNonNegativeNumberConverter"/>
+        <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        <converter:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
+        <converter:ValueConverterGroup x:Key="InverseBoolToGridLengthConverter">
+            <converter:InverseBoolConverter/>
+            <converter:BoolToGridLengthConverter/>
+        </converter:ValueConverterGroup>
+
+        <GridLength x:Key="GridLengthStarValue">*</GridLength>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#FF828282"/>
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            
+        </Style>
+        
+        
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid
+            x:Name="RootGrid"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+
+            <ScrollView 
+                    BackgroundColor="Transparent" 
+                    Orientation="Vertical">
+
+                <Grid 
+                     RowSpacing="0"
+                     HorizontalOptions="FillAndExpand" 
+                     VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <!--BANNER-->                        
+                        <RowDefinition Height="{Binding Height
+                                                ,Source={x:Reference RootGrid}
+                                                ,Converter={x:StaticResource DivideNonNegativeNumberConverter}
+                                                ,ConverterParameter=3}"/>
+                        <!--BANNER-->
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--BANNER-->
+                    <Grid Grid.Row="0"
+                          BackgroundColor="Transparent">
+                        <!--POSTER-->
+                        <template:DetailBannerTemplate BindingContext="{Binding Movie}"/>
+                        <!--POSTER-->
+                        <!-- TRAILER BUTTON -->
+                        <ffimageloading:CachedImage                         
+                                                    WidthRequest="100"
+                                                    HeightRequest="100"                                                    
+                                                    FadeAnimationEnabled="true"                                                     
+                                                    Opacity="1"                                                      
+                                                    Aspect="AspectFit"
+                                                    HorizontalOptions="Center"                                                
+                                                    VerticalOptions="Center">
+                            <ffimageloading:CachedImage.Source>
+                                <FileImageSource>trailer_button_small.png</FileImageSource>
+                            </ffimageloading:CachedImage.Source>
+                            <ffimageloading:CachedImage.GestureRecognizers>
+                                <!--<TapGestureRecognizer Command="{Binding PlayTrailerCommand}" />-->
+                            </ffimageloading:CachedImage.GestureRecognizers>
+                        </ffimageloading:CachedImage>
+                        <!-- TRAILER BUTTON -->
+                        <!-- POSTER OVERLAY -->
+                        <ffimageloading:CachedImage 
+                                                    BackgroundColor="Transparent" 
+                                                    FadeAnimationEnabled="true" 
+                                                    Opacity="1"                                                      
+                                                    Aspect="Fill" 
+                                                    Margin="-20,-80,-20,0" 
+                                                    VerticalOptions="FillAndExpand">
+                            <ffimageloading:CachedImage.Source>
+                                <FileImageSource>trailer_overlay.png</FileImageSource>
+                            </ffimageloading:CachedImage.Source>
+                            <ffimageloading:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PlayTrailerCommand}" />
+                            </ffimageloading:CachedImage.GestureRecognizers>
+                        </ffimageloading:CachedImage>
+                        <!-- POSTER OVERLAY -->
+                    </Grid>
+                    <!--BANNER-->
+
+                    <!-- POSTER OVERLAY -->
+                    <ffimageloading:CachedImage 
+                                                    Grid.Row="1"
+                                                    Margin="-5,0"
+                                                    RotationX="180"
+                                                    BackgroundColor="Transparent" 
+                                                    FadeAnimationEnabled="true" 
+                                                    Opacity="1"                                                      
+                                                    Aspect="Fill" 
+                                                    VerticalOptions="FillAndExpand"                                                  >
+                        
+                        <ffimageloading:CachedImage.Source>
+                            <FileImageSource>trailer_overlay.png</FileImageSource>
+                        </ffimageloading:CachedImage.Source>
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PlayTrailerCommand}" />
+                        </ffimageloading:CachedImage.GestureRecognizers>
+                    </ffimageloading:CachedImage>
+                    <!-- POSTER OVERLAY -->
+
+
+                    <!--COVER-->                    
+                    <Grid BindingContext="{Binding Movie}"
+                          HorizontalOptions="FillAndExpand" 
+                          Grid.Row="1" 
+                          Grid.RowSpan="2"
+                          VerticalOptions="End" 
+                          TranslationY="-15" 
+                          Margin="5,0,5,0">                        
+                        
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="100*"/>
+                            </Grid.ColumnDefinitions>                        
+                        <!-- COVER GRID -->
+                            <Grid Grid.Row="0" 
+                                  Grid.Column="0" 
+                                  Grid.RowSpan="1"                                   
+                                  HorizontalOptions="Start" 
+                                  VerticalOptions="Start" 
+                                  TranslationY="-15">
+                                
+                                <!-- COVER IMAGE -->
+                                <template:MovieItemTemplate/>
+                                <!-- COVER IMAGE -->
+                            </Grid>
+                        <StackLayout 
+                            Margin="5,40"
+                            Grid.Column="1" 
+                            HeightRequest="100"                            
+                            Orientation="Vertical"
+                            >
+                            <Label Text="{Binding title}"
+                                   FontSize="Large" LineBreakMode="NoWrap"/>
+
+                            <Label Text="{Binding vote_average, StringFormat='Score: {0}'}" />
+                            <Label Text="{Binding release_date, StringFormat='Release: {0}'}"/>
+                        </StackLayout>
+                        <!-- COVER GRID -->   
+                    </Grid>
+                    <!--COVER-->
+                    
+                    <!--OVERVIEW-->
+                    <Label 
+                        Margin="10,-40"
+                        Grid.Row="3"
+                        BindingContext="{Binding Movie}"
+                        Text="{Binding overview}"/>
+                    <!--OVERVIEW-->
+                    
+
+                </Grid>
+            </ScrollView>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>
