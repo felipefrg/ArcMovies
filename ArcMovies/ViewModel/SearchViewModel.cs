@@ -17,7 +17,7 @@ namespace ArcMovies.ViewModel
         ICommand _loadCommand;
         public ICommand LoadCommand
         {
-            get { return _loadCommand ?? (_loadCommand = new Command(async () => { await LoadAllGenres(); })); }
+            get { return _loadCommand ?? (_loadCommand = new Command(() => { Load(LoadAllGenres); })); }
         }
 
         private ICommand _searchByGenreCommand;
@@ -48,12 +48,25 @@ namespace ArcMovies.ViewModel
 
         async Task SearchByGenre(object obj)
         {
-            if (obj is Genre genre)
+            try
             {
-                GenreViewModel genreViewModel = new GenreViewModel(genre);
-                await DependencyService
-                    .Get<Navigation.Abstraction.INavigationPage>()
-                    .NavigateToGenreAsync(genreViewModel);
+                this.IsLoading = true;
+                this.HasError = false;
+                if (obj is Genre genre)
+                {
+                    GenreViewModel genreViewModel = new GenreViewModel(genre);
+                    await DependencyService
+                        .Get<Navigation.Abstraction.INavigationPage>()
+                        .NavigateToGenreAsync(genreViewModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.HasError = true;
+            }
+            finally
+            {
+                this.IsLoading = false;
             }
         }
 
@@ -77,18 +90,32 @@ namespace ArcMovies.ViewModel
 
         private async Task SearchByKeyWord(string keyword)
         {
-            if (string.IsNullOrWhiteSpace(keyword))
-                return;
-
-            _config.ByName(keyword);
-
-            var serviceResult = await DependencyService.Get<ITMDbService>().GetSection(_config);
-            if (serviceResult != null && serviceResult.results != null)
+            try
             {
-                this.MovieList = new ObservableCollection<Movie>(serviceResult.results);
-                this.TotalPage = serviceResult.total_pages;
-                this.TotalResults = serviceResult.total_results;
-                this.CurrentPage = serviceResult.page;
+                this.IsLoading = true;
+                this.HasError = false;
+
+                if (string.IsNullOrWhiteSpace(keyword))
+                    return;
+
+                _config.ByName(keyword);
+
+                var serviceResult = await DependencyService.Get<ITMDbService>().GetSection(_config);
+                if (serviceResult != null && serviceResult.results != null)
+                {
+                    this.MovieList = new ObservableCollection<Movie>(serviceResult.results);
+                    this.TotalPage = serviceResult.total_pages;
+                    this.TotalResults = serviceResult.total_results;
+                    this.CurrentPage = serviceResult.page;
+                }
+            }
+            catch(Exception ex)
+            {
+                this.HasError = true;
+            }
+            finally
+            {
+                this.IsLoading = false; 
             }
         }
 
